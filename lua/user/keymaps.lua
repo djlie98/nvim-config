@@ -215,7 +215,7 @@ wk.register({
 		name = "Harpoon",
 	},
 })
-nnoremap("<leader>ho", function()
+nnoremap("<leader>hh", function()
 	harpoon_ui.toggle_quick_menu()
 end, { desc = "Toggle Harpoon quick menu" })
 
@@ -296,6 +296,9 @@ nnoremap("<leader>ff", function()
 end, { desc = "[F]ind [F]iles" })
 nnoremap("<leader>fh", require("telescope.builtin").help_tags, { desc = "[F]ind [H]elp" })
 nnoremap("<leader>fw", require("telescope.builtin").live_grep, { desc = "[F]ind by [W]ord" })
+
+nnoremap("<leader>fp", ":Telescope neovim-project discover<CR>", { desc = "[F]ind [p]rojects" })
+nnoremap("<leader>fP", ":Telescope neovim-project history<CR>", { desc = "[F]ind Recent [P]rojects" })
 
 nnoremap("<leader>fc", function()
 	require("telescope.builtin").commands(require("telescope.themes").get_dropdown({
