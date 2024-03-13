@@ -205,8 +205,8 @@ nnoremap("<leader>rw", ":RotateWindows<cr>", { desc = "[R]otate [W]indows" })
 nnoremap("gx", ":sil !open <cWORD><cr>", { silent = true })
 
 -- TSC autocommand keybind to run TypeScripts tsc
-nnoremap("<leader>t", ":TSC<cr>", { desc = "[T]ypeScript [C]ompile" })
-
+-- nnoremap("<leader>t", ":TSC<cr>", { desc = "[T]ypeScript [C]ompile" })
+--
 -- Harpoon keybinds --
 -- Open harpoon ui
 
@@ -353,7 +353,7 @@ nnoremap("|", ":vsplit<CR>", { desc = "Vertical Split" })
 nnoremap("\\", ":split<CR>", { desc = "Horizontal Split" })
 
 -- Symbol Outline keybind
-nnoremap("<leader>so", ":SymbolsOutline<cr>")
+nnoremap("<leader>fo", ":SymbolsOutline<cr>")
 
 -- Open Copilot panel
 nnoremap("<leader>o", function()
@@ -365,8 +365,8 @@ nnoremap("zR", require("ufo").openAllFolds)
 nnoremap("zM", require("ufo").closeAllFolds)
 
 -- Insert --
--- Map jj to <esc>
-inoremap("jj", "<esc>")
+-- -- Map jj to <esc>
+-- inoremap("jj", "<esc>")
 
 -- Visual --
 -- Disable Space bar since it'll be used as the leader key
@@ -397,8 +397,8 @@ end)
 -- Terminal --
 -- Enter normal mode while in a terminal
 tnoremap("<esc>", [[<C-\><C-n>]])
-tnoremap("jj", [[<C-\><C-n>]])
-
+-- tnoremap("jj", [[<C-\><C-n>]])
+--
 -- Window navigation from terminal
 tnoremap("<C-h>", [[<Cmd>wincmd h<CR>]])
 tnoremap("<C-j>", [[<Cmd>wincmd j<CR>]])
@@ -426,5 +426,26 @@ end, { desc = "Flash Treesitter" })
 nnoremap("<leader>jr", function()
 	require("flash").treesitter_search()
 end, { desc = "Flash Treesitter Search" })
+
+-- Terminal Keymaps
+wk.register({
+	["<leader>t"] = {
+		name = "Terminal",
+	},
+})
+
+nnoremap("<leader>tt", function()
+	require("toggleterm").toggle()
+end, { desc = "Toggle Terminal" })
+tnoremap("<leader>tt", function()
+	require("toggleterm").toggle()
+end, { desc = "Toggle Terminal" })
+
+nnoremap("<leader>tg", function()
+	local Terminal = require("toggleterm.terminal").Terminal
+	local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+
+	lazygit:toggle()
+end, { desc = "Toggle LazyGit" })
 
 return M
