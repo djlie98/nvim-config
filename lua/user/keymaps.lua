@@ -17,45 +17,45 @@ local wk = require("which-key")
 nnoremap("<space>", "<nop>")
 
 -- Window +  better kitty navigation
-nnoremap("<C-j>", function()
-	if vim.fn.exists(":KittyNavigateDown") ~= 0 and TERM == "xterm-kitty" then
-		vim.cmd.KittyNavigateDown()
-	elseif vim.fn.exists(":NvimTmuxNavigateDown") ~= 0 then
-		vim.cmd.NvimTmuxNavigateDown()
-	else
-		vim.cmd.wincmd("j")
-	end
-end)
+-- nnoremap("<C-j>", function()
+-- 	if vim.fn.exists(":KittyNavigateDown") ~= 0 and TERM == "xterm-kitty" then
+-- 		vim.cmd.KittyNavigateDown()
+-- 	elseif vim.fn.exists(":NvimTmuxNavigateDown") ~= 0 then
+-- 		vim.cmd.NvimTmuxNavigateDown()
+-- 	else
+-- 		vim.cmd.wincmd("j")
+-- 	end
+-- end)
 
-nnoremap("<C-k>", function()
-	if vim.fn.exists(":KittyNavigateUp") ~= 0 and TERM == "xterm-kitty" then
-		vim.cmd.KittyNavigateUp()
-	elseif vim.fn.exists(":NvimTmuxNavigateUp") ~= 0 then
-		vim.cmd.NvimTmuxNavigateUp()
-	else
-		vim.cmd.wincmd("k")
-	end
-end)
+-- nnoremap("<C-k>", function()
+-- 	if vim.fn.exists(":KittyNavigateUp") ~= 0 and TERM == "xterm-kitty" then
+-- 		vim.cmd.KittyNavigateUp()
+-- 	elseif vim.fn.exists(":NvimTmuxNavigateUp") ~= 0 then
+-- 		vim.cmd.NvimTmuxNavigateUp()
+-- 	else
+-- 		vim.cmd.wincmd("k")
+-- 	end
+-- end)
 
-nnoremap("<C-l>", function()
-	if vim.fn.exists(":KittyNavigateRight") ~= 0 and TERM == "xterm-kitty" then
-		vim.cmd.KittyNavigateRight()
-	elseif vim.fn.exists(":NvimTmuxNavigateRight") ~= 0 then
-		vim.cmd.NvimTmuxNavigateRight()
-	else
-		vim.cmd.wincmd("l")
-	end
-end)
+-- nnoremap("<C-l>", function()
+-- 	if vim.fn.exists(":KittyNavigateRight") ~= 0 and TERM == "xterm-kitty" then
+-- 		vim.cmd.KittyNavigateRight()
+-- 	elseif vim.fn.exists(":NvimTmuxNavigateRight") ~= 0 then
+-- 		vim.cmd.NvimTmuxNavigateRight()
+-- 	else
+-- 		vim.cmd.wincmd("l")
+-- 	end
+-- end)
 
-nnoremap("<C-h>", function()
-	if vim.fn.exists(":KittyNavigateLeft") ~= 0 and TERM == "xterm-kitty" then
-		vim.cmd.KittyNavigateLeft()
-	elseif vim.fn.exists(":NvimTmuxNavigateLeft") ~= 0 then
-		vim.cmd.NvimTmuxNavigateLeft()
-	else
-		vim.cmd.wincmd("h")
-	end
-end)
+-- nnoremap("<C-h>", function()
+-- 	if vim.fn.exists(":KittyNavigateLeft") ~= 0 and TERM == "xterm-kitty" then
+-- 		vim.cmd.KittyNavigateLeft()
+-- 	elseif vim.fn.exists(":NvimTmuxNavigateLeft") ~= 0 then
+-- 		vim.cmd.NvimTmuxNavigateLeft()
+-- 	else
+-- 		vim.cmd.wincmd("h")
+-- 	end
+-- end)
 
 -- Swap between last two buffers
 nnoremap("<leader>'", "<C-^>", { desc = "Switch to last buffer" })
@@ -339,7 +339,7 @@ M.map_lsp_keybinds = function(buffer_number)
 	)
 
 	-- See `:help K` for why this keymap
-	nnoremap("K", vim.lsp.buf.hover, { desc = "LSP: Hover Documentation", buffer = buffer_number })
+	nnoremap("D", vim.lsp.buf.hover, { desc = "LSP: Hover [D]ocumentation", buffer = buffer_number })
 	nnoremap("<leader>k", vim.lsp.buf.signature_help, { desc = "LSP: Signature Documentation", buffer = buffer_number })
 	inoremap("<C-k>", vim.lsp.buf.signature_help, { desc = "LSP: Signature Documentation", buffer = buffer_number })
 
@@ -377,26 +377,48 @@ vnoremap("L", "$<left>")
 vnoremap("H", "^")
 
 -- Paste without losing the contents of the register
-vnoremap("<A-j>", ":m '>+1<CR>gv=gv")
-vnoremap("<A-k>", ":m '<-2<CR>gv=gv")
+vnoremap("<A-J>", ":m '>+1<CR>gv=gv")
+vnoremap("<A-K>", ":m '<-2<CR>gv=gv")
 
--- Reselect the last visual selection
-xnoremap("<<", function()
-	xnoremap("<leader>p", '"_dP')
+-- Move line unselected
+-- Left
+nnoremap("<C-h>", function()
+	vim.cmd("normal! <<")
+end)
 
-	-- Move selected text up/down in visual mode
+-- Right
+nnoremap("<C-l>", function()
+	vim.cmd("normal! >>")
+end)
+
+-- Down
+nnoremap("<C-j>", ":MoveLine(1)<CR>")
+
+-- Up
+nnoremap("<C-k>", ":MoveLine(-1)<CR>")
+
+-- Move line selected
+-- Left
+xnoremap("<C-h>", function()
 	vim.cmd("normal! <<")
 	vim.cmd("normal! gv")
 end)
 
-xnoremap(">>", function()
+-- Right
+xnoremap("<C-l>", function()
 	vim.cmd("normal! >>")
 	vim.cmd("normal! gv")
 end)
 
+-- Down
+xnoremap("<C-j>", ":MoveBlock(1)<CR>")
+
+-- Up
+xnoremap("<C-k>", ":MoveBlock(-1)<CR>")
+
 -- Terminal --
 -- Enter normal mode while in a terminal
-tnoremap("<esc>", [[<C-\><C-n>]])
+tnoremap("<C-i>", [[<C-\><C-n>]])
 -- tnoremap("jj", [[<C-\><C-n>]])
 --
 -- Window navigation from terminal
@@ -434,10 +456,10 @@ wk.register({
 	},
 })
 
-nnoremap("<leader>tt", function()
+nnoremap("C-`>", function()
 	require("toggleterm").toggle()
 end, { desc = "Toggle Terminal" })
-tnoremap("<leader>tt", function()
+tnoremap("<C-`>", function()
 	require("toggleterm").toggle()
 end, { desc = "Toggle Terminal" })
 
@@ -447,5 +469,7 @@ nnoremap("<leader>tg", function()
 
 	lazygit:toggle()
 end, { desc = "Toggle LazyGit" })
+
+nnoremap("q", "q")
 
 return M
