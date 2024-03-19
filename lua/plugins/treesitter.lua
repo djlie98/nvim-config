@@ -8,6 +8,7 @@ return {
 		dependencies = {
 			-- Additional text objects for treesitter
 			"nvim-treesitter/nvim-treesitter-textobjects",
+			"nvim-treesitter/nvim-treesitter-context",
 		},
 		config = function()
 			---@diagnostic disable: missing-fields

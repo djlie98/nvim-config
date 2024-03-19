@@ -115,17 +115,17 @@ return {
 				pyright = {},
 				sqlls = {},
 				tailwindcss = {},
-				tsserver = {
-					settings = {
-						maxTsServerMemory = 12000,
-					},
-					handlers = {
-						["textDocument/publishDiagnostics"] = vim.lsp.with(
-							tsserver_on_publish_diagnostics_override,
-							{}
-						),
-					},
-				},
+				-- tsserver = {
+				-- 	settings = {
+				-- 		maxTsServerMemory = 12000,
+				-- 	},
+				-- 	handlers = {
+				-- 		["textDocument/publishDiagnostics"] = vim.lsp.with(
+				-- 			tsserver_on_publish_diagnostics_override,
+				-- 			{}
+				-- 		),
+				-- 	},
+				-- },
 				yamlls = {},
 			}
 
@@ -198,6 +198,15 @@ return {
 				javascript = { { "eslint_d", "eslint" }, { "prettierd", "prettier" } },
 				typescript = { { "eslint_d", "eslint" }, { "prettierd", "prettier" } },
 				lua = { "stylua" },
+			},
+		},
+	},
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		opts = {
+			settings = {
+				expose_as_code_action = "all",
 			},
 		},
 	},

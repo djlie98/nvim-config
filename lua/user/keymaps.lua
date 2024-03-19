@@ -71,7 +71,7 @@ nnoremap("<leader>z", "<cmd>wq<cr>", { silent = false })
 
 -- Map Oil to <leader>e
 nnoremap("<leader>e", function()
-	require("oil").toggle_float()
+	require("oil").open()
 end, { desc = "File Explorer" })
 
 -- Center buffer while navigating
@@ -257,7 +257,7 @@ end, { desc = "Go to Harpoon Mark 5" })
 
 wk.register({
 	["<leader>g"] = {
-		name = "Git",
+		name = "Git/Go",
 	},
 })
 -- Git keymaps --
@@ -317,6 +317,11 @@ nnoremap("<leader>fs", function()
 		previewer = false,
 	}))
 end, { desc = "[F]ind [S]pelling suggestions" })
+
+-- Go to context
+nnoremap("gk", function()
+	require("treesitter-context").go_to_context(vim.v.count1)
+end, { silent = true, desc = "Go to [C]ontext" })
 
 -- LSP Keybinds (exports a function to be used in ../../after/plugin/lsp.lua b/c we need a reference to the current buffer) --
 M.map_lsp_keybinds = function(buffer_number)
@@ -456,10 +461,10 @@ wk.register({
 	},
 })
 
-nnoremap("C-`>", function()
+nnoremap("<C-\\>", function()
 	require("toggleterm").toggle()
 end, { desc = "Toggle Terminal" })
-tnoremap("<C-`>", function()
+tnoremap("<C-\\>", function()
 	require("toggleterm").toggle()
 end, { desc = "Toggle Terminal" })
 
@@ -471,5 +476,8 @@ nnoremap("<leader>tg", function()
 end, { desc = "Toggle LazyGit" })
 
 nnoremap("q", "q")
+
+-- TS Tools
+nnoremap("<leader>i", ":TSToolsAddMissingImports<CR>:TSToolsOrganizeImports<CR>", { desc = "Organize Imports" })
 
 return M
