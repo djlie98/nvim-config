@@ -1,7 +1,6 @@
 return {
 	{
 		"zbirenbaum/copilot.lua",
-		enabled = false,
 		event = { "BufEnter" },
 		config = function()
 			require("copilot").setup({
@@ -9,12 +8,14 @@ return {
 					enabled = false,
 				},
 				panel = { enabled = false },
+				filetypes = {
+					yaml = true,
+				},
 			})
 		end,
 	},
 	{
 		"zbirenbaum/copilot-cmp",
-		enabled = false,
 		event = { "BufEnter" },
 		dependencies = { "zbirenbaum/copilot.lua" },
 		config = function()

@@ -9,6 +9,7 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
+			"petertriho/cmp-git",
 			{
 				"L3MON4D3/LuaSnip",
 				version = "v2.2",
@@ -25,6 +26,8 @@ return {
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 			local lspkind = require("lspkind")
+
+			require("cmp_git").setup()
 
 			require("nvim-autopairs").setup()
 
@@ -73,6 +76,7 @@ return {
 				}),
 				-- sources for autocompletion
 				sources = cmp.config.sources({
+					{ name = "git" }, -- git @ and #
 					{ name = "nvim_lsp" }, -- lsp
 					{ name = "buffer", max_item_count = 5 }, -- text within current buffer
 					{ name = "copilot" }, -- Copilot suggestions

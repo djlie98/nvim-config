@@ -1,3 +1,6 @@
+-- Disable show mode
+vim.opt.showmode = false
+
 -- Enable relative line numbers
 vim.opt.nu = true
 vim.opt.rnu = true

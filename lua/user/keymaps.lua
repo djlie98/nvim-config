@@ -463,10 +463,10 @@ wk.register({
 
 nnoremap("<C-\\>", function()
 	require("toggleterm").toggle()
-end, { desc = "Toggle Terminal" })
+end, { desc = "Toggle Terminal", silent = true })
 tnoremap("<C-\\>", function()
 	require("toggleterm").toggle()
-end, { desc = "Toggle Terminal" })
+end, { desc = "Toggle Terminal", silent = true })
 
 nnoremap("<leader>tg", function()
 	local Terminal = require("toggleterm.terminal").Terminal
@@ -479,5 +479,10 @@ nnoremap("q", "q")
 
 -- TS Tools
 nnoremap("<leader>i", ":TSToolsAddMissingImports<CR>:TSToolsOrganizeImports<CR>", { desc = "Organize Imports" })
+
+-- Octo
+nnoremap("<leader>gg", ":Octo<CR>", { desc = "Open Octo Menu" })
+nnoremap("<leader>gp", ":Octo search is:pr is:open review-requested:@me<CR>", { desc = "List PR Requested Reviews" })
+nnoremap("<leader>ga", ":Octo search is:pr is:open author:@me<CR>", { desc = "List PR Author Me" })
 
 return M
